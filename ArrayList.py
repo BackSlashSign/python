@@ -13,11 +13,12 @@ m(erge), p(rint): ")
     def remove(self, elem):
         for i in range(self.items.__len__()) :
             if self.items[i] == elem :
+                self.items.pop(i)
                 return print("{0} removed".format(elem)), self.InputUpdate()
         return print("no such element"), self.InputUpdate()   
 
     def insert(self, pos, elem):
-        return self.items.insert(int(pos), int(elem)), self.InputUpdate()
+        return self.items.insert(int(pos), elem), self.InputUpdate()
 
     def delete(self, pos):
         return self.items.pop(int(pos)), self.InputUpdate()
@@ -56,7 +57,7 @@ m(erge), p(rint): ")
         return print("해당하는 항목이 없습니다. : %s 없음"%elem), self.InputUpdate()
 
     def replace(self, pos, elem):
-        self.items[pos] = elem
+        self.items[int(pos)] = elem
         return self.InputUpdate()
     
     def sort(self):
@@ -80,7 +81,9 @@ m(erge), p(rint): ")
             for i in self.items:
                 if i not in new_list:
                     new_list.append(i)
-            return new_list, self.InputUpdate()
+            print(new_list)
+            self.items = new_list
+            return self.InputUpdate()
 
     def InputUpdate(self):
         yourInput = input()
@@ -122,9 +125,12 @@ m(erge), p(rint): ")
             self.clear()
         elif inputdata[0] == "f":
             self.find(inputdata[1])
-        else:
-            print("형식에 맞지 않게 입력되었습니다.")
+        elif inputdata[0] == "q":
             print("프로그램 종료.")
+            return 0
+        else:
+            print("형식에 맞지 않게 입력되었습니다. 다시 입력하세요")
+            return self.InputUpdate(self)
         return 0
 
     def quit():
@@ -133,4 +139,4 @@ m(erge), p(rint): ")
 def main():
     arraylst = ArrayList()
     
-main()
+# main()
